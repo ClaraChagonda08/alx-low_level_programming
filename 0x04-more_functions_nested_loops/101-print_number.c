@@ -1,35 +1,48 @@
 #include "main.h"
 
+void print_prev_digits(int n);
+
 /**
-* print_number - prints # using _putchar function
-* @n: the integer to print
-*
-* Return: void
-*/
+ * print_number - prints a number using _putchar
+ *
+ * @n: number to print
+ * Return: void
+ */
 void print_number(int n)
 {
-	int copy, nth, size = 1, ones = n % 10;
-
-	n /= 10;
-	copy = n;
-	if (ones < 0)
+	if (n < 0)
 	{
-		ones *= -1, copy *= -1, n *= -1;
 		_putchar('-');
 	}
-	if (copy > 0)
+	if (n > 9 || n < -9)
+		print_prev_digits(n);
+	if (n < 0)
+		_putchar(((n % 10) * -1) + '0');
+	else
+		_putchar((n % 10) + '0');
+}
+
+/**
+ * print_prev_digits - recursive function to print all previous digits in num
+ *
+ * @n: number to print previous digits of
+ * Return: void
+ */
+void print_prev_digits(int n)
+{
+	if (((n / 10) < -9) || ((n / 10) > 9))
 	{
-		while (copy / 10 != 0)
-		{
-			copy /= 10, size *= 10;
-		}
-		while (size > 0)
-		{
-			nth = n / size;
-			_putchar('0' + nth);
-			n -= nth * size;
-			size /= 10;
-		}
+		print_prev_digits(n / 10);
+		if (n < 0)
+			_putchar((((n / 10) % 10) * -1) + '0');
+		else
+			_putchar(((n / 10) % 10) + '0');
 	}
-	_putchar('0' + ones);
+	else
+	{
+		if (n < 0)
+			_putchar(((n / 10) * -1) + '0');
+		else
+			_putchar((n / 10) + '0');
+	}
 }
