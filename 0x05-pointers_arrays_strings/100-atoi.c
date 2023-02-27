@@ -1,37 +1,32 @@
-#include<stdio.h>
-#include<stdlib.h>
-/**
- * main - check the code
- *
- * Return: Always 0.
+/*
+ * File: 100-atoi.c
+ * Auth: Brennan D Baraban
  */
-char* str(){
-return "122";
-}
-char* str2(){
-return "Hello!";
-}
-char* str3(){
-return "99Hello!";
-}
-int main() {
-	/*Converting a numeric string */
-	char* str[10];
-	char* str2[10];
-	char* str3[10];
-	int x;
-    	str[10] = str();
-  	x = atoi(str);
-	printf("Converting '122': %d\n", x);
 
-	/* Converting an alphanumeric string */
-	str2[10] = str2();
-  	x = atoi(str2);
-        printf("Converting 'Hello!': %d\n", x);
+#include "holberton.h"
 
-        /* Converting a partial string */
-        str3[10] = str3();
-        x = atoi(str3);
-        printf("Converting '99Hello!': %d\n", x);
-        return 0;
+/**
+ * _atoi - Converts a string to an integer.
+ * @s: The string to be converted.
+ *
+ * Return: The integer value of the converted string.
+ */
+int _atoi(char *s)
+{
+	int sign = 1;
+	unsigned int num = 0;
+
+	do {
+		if (*s == '-')
+			sign *= -1;
+
+		else if (*s >= '0' && *s <= '9')
+			num = (num * 10) + (*s - '0');
+
+		else if (num > 0)
+			break;
+
+	} while (*s++);
+
+	return (num * sign);
 }
